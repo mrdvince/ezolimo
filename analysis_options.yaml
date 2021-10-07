@@ -1,5 +1,12 @@
-include: package:very_good_analysis/analysis_options.2.3.0.yaml
-linter:
-  rules:
-    public_member_api_docs: false
-    always_use_package_imports: false
+# include: package:very_good_analysis/analysis_options.2.3.0.yaml
+# linter:
+#   rules:
+#     public_member_api_docs: false
+#     always_use_package_imports: false
+#     prefer_int_literals: false
+#     constant_identifier_names: false
+#     prefer_const_constructors: false
+#     prefer_if_elements_to_conditional_expressions: false
+#     unnecessary_null_comparison: false
+#     sized_box_for_whitespace: false
+#     implicit_dynamic_map_literal: false
