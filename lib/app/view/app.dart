@@ -1,5 +1,6 @@
 // ignore_for_file: always_use_package_imports
 
+import 'package:ezolimo/presentantion/feautures/sign_in/screen/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -22,7 +23,7 @@ class App extends StatelessWidget {
         GlobalMaterialLocalizations.delegate,
       ],
       supportedLocales: AppLocalizations.supportedLocales,
-      home: const Scaffold(),
+      home: const SignInScreen(),
     );
   }
 }
