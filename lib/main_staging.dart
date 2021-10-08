@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'core/constants/strings.dart';
 import 'core/themes/app_theme.dart';
-import 'logic/debug/app_bloc_observer.dart';
+import 'domain/debug/app_bloc_observer.dart';
 import 'presentation/router/app_router.dart';
 
 void main() {
