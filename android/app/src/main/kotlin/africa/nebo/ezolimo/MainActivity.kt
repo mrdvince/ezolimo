@@ -1,4 +1,4 @@
-package com.example.bloc_architecture_app
+package africa.nebo.ezolimo
 
 import io.flutter.embedding.android.FlutterActivity
 
