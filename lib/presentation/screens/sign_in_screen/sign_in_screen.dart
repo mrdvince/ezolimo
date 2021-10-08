@@ -1,3 +1,5 @@
+import 'package:ezolimo/data/http/http_client.dart';
+import 'package:ezolimo/presentation/router/app_router.dart';
 import 'package:flutter/material.dart';
 
 import 'widgets/email_password.dart';
@@ -11,6 +13,17 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
+  final _formKey = GlobalKey<FormState>();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  String message = '';
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,7 +86,10 @@ class _SignInScreenState extends State<SignInScreen> {
                                     blurRadius: 20,
                                     offset: Offset(0, 10))
                               ]),
-                          child: const EmailPassword(),
+                          child: EmailPassword(
+                              formKey: _formKey,
+                              emailController: emailController,
+                              passwordController: passwordController),
                         ),
                         const SizedBox(
                           height: 40,
@@ -91,12 +107,31 @@ class _SignInScreenState extends State<SignInScreen> {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(50),
                               color: Colors.green.shade900),
-                          child: const Center(
-                            child: Text(
-                              "Login",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
+                          child: Center(
+                            child: TextButton(
+                              child: const Text("Login",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold)),
+                              onPressed: () async {
+                                if (_formKey.currentState!.validate()) {
+                                  var email =
+                                      emailController.text.replaceAll(' ', '');
+                                  var password = passwordController.text;
+                                  setState(() {
+                                    message = 'please wait ...';
+                                  });
+                                  var rsp = await loginUser(email, password);
+                                  if (rsp.toString().contains('access_token')) {
+                                    Navigator.of(context)
+                                        .pushNamed(AppRouter.home);
+                                  } else {
+                                    setState(() {
+                                      message = 'Login failed ....';
+                                    });
+                                  }
+                                }
+                              },
                             ),
                           ),
                         ),
