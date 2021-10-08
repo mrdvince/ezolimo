@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="africa.nebo.ezolimo">
    <application
-        android:label="ezolimo"
+        android:label="Nebo"
         android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
