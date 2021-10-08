@@ -12,10 +12,12 @@ environment:
 dependencies:
   bloc: ^7.2.0
   cupertino_icons: ^1.0.0
+  equatable: ^2.0.3
   flutter:
     sdk: flutter
   flutter_bloc: ^7.3.0
   flutter_lints: ^1.0.4
+  flutter_secure_storage: ^4.2.1
   hydrated_bloc: ^7.1.0
 
 dev_dependencies:
