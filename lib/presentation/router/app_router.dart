@@ -1,4 +1,4 @@
-import 'package:ezolimo/presentation/screens/sign_in_screen/sign_in_screen.dart';
+import '../screens/sign_in_screen/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/constants/strings.dart';
