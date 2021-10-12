@@ -1,8 +1,8 @@
-import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future getToken({required String email, required String password}) async {
+Future getAuthTokenReq(
+    {required String email, required String password}) async {
   String url = 'https://prod.api.nebo.africa/api/v1/login/access-token';
   var map = <String, dynamic>{};
   map['username'] = email;
