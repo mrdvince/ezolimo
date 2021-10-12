@@ -2,8 +2,6 @@ import '../../../domain/storage.dart';
 import '../sign_in_screen/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 
-import '../../../core/constants/strings.dart';
-
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
