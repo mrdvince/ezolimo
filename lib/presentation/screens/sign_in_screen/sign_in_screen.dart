@@ -1,5 +1,6 @@
-import 'package:ezolimo/data/http/http_client.dart';
-import 'package:ezolimo/presentation/router/app_router.dart';
+import '../../../data/http/http_client.dart';
+import '../../../domain/storage.dart';
+import '../../router/app_router.dart';
 import 'package:flutter/material.dart';
 
 import 'widgets/email_password.dart';
@@ -118,17 +119,15 @@ class _SignInScreenState extends State<SignInScreen> {
                                   var email =
                                       emailController.text.replaceAll(' ', '');
                                   var password = passwordController.text;
-                                  setState(() {
-                                    message = 'please wait ...';
-                                  });
-                                  var rsp = await loginUser(email, password);
+                                  var rsp = await getAuthTokenReq(
+                                      email: email, password: password);
                                   if (rsp.toString().contains('access_token')) {
-                                    Navigator.of(context)
-                                        .pushNamed(AppRouter.home);
-                                  } else {
-                                    setState(() {
-                                      message = 'Login failed ....';
-                                    });
+                                    // store token
+                                    String token = rsp['access_token'];
+                                    Storage().secureStorage.write(
+                                        key: 'access_token', value: token);
+                                    Navigator.pushNamedAndRemoveUntil(context,
+                                        AppRouter.home, (route) => false);
                                   }
                                 }
                               },
