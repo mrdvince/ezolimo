@@ -1,9 +1,8 @@
-import '../screens/sign_in_screen/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 
-import '../../core/constants/strings.dart';
 import '../../core/exceptions/route_exception.dart';
 import '../screens/home_screen/home_screen.dart';
+import '../screens/sign_in_screen/sign_in_screen.dart';
 
 class AppRouter {
   static const String home = '/';
@@ -15,9 +14,7 @@ class AppRouter {
     switch (settings.name) {
       case home:
         return MaterialPageRoute(
-          builder: (_) => const HomeScreen(
-            title: Strings.homeScreenTitle,
-          ),
+          builder: (_) => const HomeScreen(),
         );
       case signin:
         return MaterialPageRoute(
