@@ -1,23 +1,15 @@
-import '../models/user_model.dart';
+import '../http/http_client.dart';
 
-abstract class UserRepository {
+import '../models/model.dart';
+
+class UserRepository {
   // signin with email and password and return token
-  Future<String> signIn({
-    required String email,
-    required String password,
-  });
-  // sign up with email and password and return token
-  Future<String> signUp({
-    required String name,
-    required String email,
-    required String password,
-  });
-
-  // return user as appuser
-  Future<AppUser> getUser();
-
-  // send email forgot password
-  Future<void> forgotPassword({
-    required String email,
-  });
+  Future<String> signIn(email, password) async {
+    final rawResponse = await getAuthTokenReq(email: email, password: password);
+    if (rawResponse != []) {
+      final token = rawResponse.map((e) => AuthToken.fromJson(e)).toList();
+      return token['access_token'];
+    }
+    return '';
+  }
 }
