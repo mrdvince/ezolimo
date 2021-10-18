@@ -1,36 +1,46 @@
-import '../../../domain/storage.dart';
-import '../sign_in_screen/sign_in_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../logic/auth/auth_cubit.dart';
+import '../../router/app_router.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
-  Future<String> get jwtOrEmpty async {
-    var jwt = await Storage().secureStorage.read(key: 'access_token') ?? '';
-    return jwt;
-  }
-
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Authentication Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: FutureBuilder(
-          future: jwtOrEmpty,
-          builder: (context, snapshot) {
-            if (!snapshot.hasData) return const CircularProgressIndicator();
-            if (snapshot.data != "") {
-              var str = snapshot.data;
-              return Scaffold(
-                  body: Center(
-                child: Text(snapshot.data as String),
-              ));
-            } else {
-              return const SignInScreen();
-            }
-          }),
+    BlocProvider.of<AuthCubit>(context).isAuthenticated();
+
+    return BlocConsumer<AuthCubit, AuthState>(
+      listener: (context, state) {
+        if (state is Unauthenticated) {
+          Navigator.pushNamedAndRemoveUntil(
+              context, AppRouter.signin, (route) => false);
+        }
+      },
+      builder: (context, state) {
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text('Nebos'),
+            actions: [
+              IconButton(
+                  onPressed: () {
+                    clearToken(context);
+                  },
+                  icon: const Icon(Icons.logout_outlined))
+            ],
+          ),
+          body: const Center(
+            child: Text('camera'),
+          ),
+        );
+      },
     );
+  }
+
+  void clearToken(
+    BuildContext context,
+  ) {
+    BlocProvider.of<AuthCubit>(context).logOut();
   }
 }
