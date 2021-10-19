@@ -11,4 +11,6 @@ class Strings {
   static String useGallery = 'Use Gallery';
 
   static String pickImage = 'Pick an Image';
+
+  static String predict = 'Predict';
 }
