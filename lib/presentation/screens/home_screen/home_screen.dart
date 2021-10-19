@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:ezolimo/core/constants/strings.dart';
-import 'package:ezolimo/logic/predict/predict_cubit.dart';
+import '../../../core/constants/strings.dart';
+import '../../../logic/predict/predict_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -26,7 +26,7 @@ class HomeScreen extends StatelessWidget {
       builder: (context, state) {
         return Scaffold(
             appBar: AppBar(
-              title: const Text('Nebos'),
+              title: Text(Strings.appTitle),
               actions: [
                 IconButton(
                     onPressed: () {
@@ -101,20 +101,38 @@ class _CameraState extends State<Camera> {
                 height: 300.0,
                 width: MediaQuery.of(context).size.width,
               ),
-        OutlinedButton(
-          onPressed: () {
-            _openImagePicker(context, cubit);
-          },
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Icon(Icons.camera_alt),
-              SizedBox(
-                width: 5.0,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            OutlinedButton(
+              onPressed: () {
+                _openImagePicker(context, cubit);
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(Icons.camera_alt),
+                  const SizedBox(
+                    width: 5.0,
+                  ),
+                  Text(Strings.pickImage)
+                ],
               ),
-              Text("Add Image")
-            ],
-          ),
+            ),
+            OutlinedButton(
+                onPressed: () {
+                  cubit.objDetectImage(cubit.state.imageFile);
+                },
+                child: Row(
+                  children: [
+                    const Icon(Icons.precision_manufacturing),
+                    const SizedBox(
+                      width: 5.0,
+                    ),
+                    Text(Strings.predict),
+                  ],
+                ))
+          ],
         ),
       ],
     );
