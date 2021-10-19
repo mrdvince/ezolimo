@@ -9,4 +9,5 @@ class Storage {
 
   FlutterSecureStorage secureStorage = const FlutterSecureStorage();
   String token = '';
+
 }

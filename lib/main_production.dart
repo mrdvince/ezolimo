@@ -1,4 +1,4 @@
-import 'package:ezolimo/logic/auth/auth_cubit.dart';
+import 'logic/auth/auth_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

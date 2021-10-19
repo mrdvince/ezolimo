@@ -1,8 +1,16 @@
 class Strings {
   // App
-  static const appTitle = 'Nebo';
+  static String appTitle = 'Nebo';
 
   // HomeScreen
-  static const homeScreenTitle = 'Home';
-  static const homeScreenCenterText = 'You have not tested any images!';
+  static String homeScreenTitle = 'Home';
+  static String homeScreenCenterText = 'You have not tested any images!';
+
+  static String useCamera = 'Use Camera';
+
+  static String useGallery = 'Use Gallery';
+
+  static String pickImage = 'Pick an Image';
+
+  static String predict = 'Predict';
 }
