@@ -1,4 +1,6 @@
+import 'package:ezolimo/logic/predict/predict_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/exceptions/route_exception.dart';
 import '../screens/home_screen/home_screen.dart';
@@ -14,7 +16,10 @@ class AppRouter {
     switch (settings.name) {
       case home:
         return MaterialPageRoute(
-          builder: (_) => const HomeScreen(),
+          builder: (_) => BlocProvider(
+            create: (context) => PredictCubit(),
+            child: const HomeScreen(),
+          ),
         );
       case signin:
         return MaterialPageRoute(
