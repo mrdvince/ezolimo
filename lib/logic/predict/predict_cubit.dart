@@ -1,12 +1,17 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import '../../data/repositories/obj_repository.dart';
 import 'package:image_picker/image_picker.dart';
+
+import '../storage.dart';
 
 part 'predict_state.dart';
 
 class PredictCubit extends Cubit<PredictState> {
   final ImagePicker _picker = ImagePicker();
-  PredictCubit() : super(PredictInitial());
+  PredictCubit({required this.objDetectRepository}) : super(PredictInitial());
+
+  final ObjDetectRepository objDetectRepository;
 
   void getImage({required ImageSource source}) async {
     emit(NullIfyImage());
@@ -20,4 +25,14 @@ class PredictCubit extends Cubit<PredictState> {
       emit(ImageErrorState());
     }
   }
+
+  void objDetectImage(Object? imageFile) async {
+    var token = await _getToken();
+    objDetectRepository.getObjPred(token, imageFile.toString());
+  }
+}
+
+// get token
+Future<String> _getToken() async {
+  return await Storage().secureStorage.read(key: 'access_token') ?? '';
 }

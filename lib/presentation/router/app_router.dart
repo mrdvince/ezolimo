@@ -1,4 +1,5 @@
-import 'package:ezolimo/logic/predict/predict_cubit.dart';
+import '../../data/repositories/obj_repository.dart';
+import '../../logic/predict/predict_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -17,7 +18,8 @@ class AppRouter {
       case home:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) => PredictCubit(),
+            create: (context) =>
+                PredictCubit(objDetectRepository: ObjDetectRepository()),
             child: const HomeScreen(),
           ),
         );
