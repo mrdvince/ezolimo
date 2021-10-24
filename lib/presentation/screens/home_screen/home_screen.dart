@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:ezolimo/core/constants/urls.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -90,6 +91,15 @@ class _CameraState extends State<Camera> {
   @override
   Widget build(BuildContext context) {
     final cubit = context.watch<PredictCubit>();
+    if (cubit.state is PredictLoadingState) {
+      return const Center(child: CircularProgressIndicator());
+    }
+    return cubit.state is PredictDoneState
+        ? predMethod(cubit)
+        : defaultMethod(cubit, context);
+  }
+
+  Column defaultMethod(PredictCubit cubit, BuildContext context) {
     return Column(
       children: [
         const SizedBox(height: 10.0),
@@ -135,6 +145,16 @@ class _CameraState extends State<Camera> {
           ],
         ),
       ],
+    );
+  }
+
+  Image predMethod(PredictCubit cubit) {
+    var _predictions = cubit.state.preds;
+    return Image.network(
+      '${ServerUrls.baseUrl}/${_predictions!.path}/${_predictions.filename}',
+      fit: BoxFit.cover,
+      height: 300.0,
+      width: MediaQuery.of(context).size.width,
     );
   }
 }

@@ -1,9 +1,9 @@
-import '../../data/repositories/obj_repository.dart';
-import '../../logic/predict/predict_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/exceptions/route_exception.dart';
+import '../../data/repositories/obj_repository.dart';
+import '../../logic/predict/predict_cubit.dart';
 import '../screens/home_screen/home_screen.dart';
 import '../screens/sign_in_screen/sign_in_screen.dart';
 

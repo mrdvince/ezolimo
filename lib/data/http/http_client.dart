@@ -1,9 +1,10 @@
+import 'dart:convert';
+
+import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 import 'package:mime/mime.dart';
 
 import '../../core/constants/urls.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 Future getAuthTokenReq(
     {required String email, required String password}) async {
@@ -47,7 +48,10 @@ Future getObjDetPreds(token, String imageFilePath) async {
     final response = await http.Response.fromStream(streamedResponse);
 
     if (response.statusCode != 200 && response.statusCode != 201) {}
-    return jsonDecode(response.body);
+    final data = json.decode(response.body);
+    final Map<String, dynamic> mmap = {...data[0], ...data[1]};
+
+    return json.encode(mmap);
   } catch (e) {
     throw 'something happened $e';
   }
