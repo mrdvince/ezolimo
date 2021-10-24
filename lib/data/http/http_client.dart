@@ -27,7 +27,7 @@ Future getAuthTokenReq(
   }
 }
 
-getObjDetPreds(token, String imageFilePath) async {
+Future getObjDetPreds(token, String imageFilePath) async {
   String url = ServerUrls.baseUrl + ServerUrls.predictUrlPrefix;
 
   final mimeTypeData = lookupMimeType(imageFilePath)!.split('/');
@@ -45,9 +45,10 @@ getObjDetPreds(token, String imageFilePath) async {
   try {
     final streamedResponse = await imageUploadreq.send();
     final response = await http.Response.fromStream(streamedResponse);
-    if (response.statusCode != 200 && response.statusCode != 201) {}
 
-    final responseData = json.decode(response.body);
-  } catch (e) {}
-  return '';
+    if (response.statusCode != 200 && response.statusCode != 201) {}
+    return jsonDecode(response.body);
+  } catch (e) {
+    throw 'something happened $e';
+  }
 }
