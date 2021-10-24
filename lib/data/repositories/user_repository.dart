@@ -1,6 +1,6 @@
 import '../http/http_client.dart';
 
-import '../models/model.dart';
+import '../models/user_model.dart';
 
 class UserRepository {
   // signin with email and password and return token
