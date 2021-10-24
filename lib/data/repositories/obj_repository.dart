@@ -1,4 +1,4 @@
-import 'package:ezolimo/data/models/res_model.dart';
+import '../models/res_model.dart';
 
 import '../http/http_client.dart';
 
