@@ -1,12 +1,12 @@
 import 'dart:io';
 
-import '../../../core/constants/strings.dart';
-import '../../../logic/predict/predict_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../core/constants/strings.dart';
 import '../../../logic/auth/auth_cubit.dart';
+import '../../../logic/predict/predict_cubit.dart';
 import '../../router/app_router.dart';
 
 class HomeScreen extends StatelessWidget {
