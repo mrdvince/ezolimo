@@ -28,6 +28,7 @@ class PredictCubit extends Cubit<PredictState> {
   }
 
   void objDetectImage(Object? imageFile) async {
+    emit(PredictLoadingState());
     var token = await _getToken();
     await objDetectRepository
         .getObjPred(token, imageFile.toString())

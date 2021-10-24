@@ -5,8 +5,8 @@ abstract class PredictState extends Equatable {
 
   @override
   List<Object> get props => [];
-
   Object? get imageFile => null;
+  Predictions? get preds => null;
 }
 
 class PredictInitial extends PredictState {}
@@ -28,9 +28,12 @@ class NullIfyImage extends PredictState {
 }
 
 class PredictDoneState extends PredictState {
-  final Predictions preds;
-  const PredictDoneState(this.preds);
+  final Predictions predictions;
+
+  const PredictDoneState(this.predictions);
 
   @override
-  List<Object> get props => [preds];
+  Predictions get preds => predictions;
 }
+
+class PredictLoadingState extends PredictState {}
