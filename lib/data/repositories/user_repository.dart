@@ -1,5 +1,4 @@
 import '../http/http_client.dart';
-
 import '../models/user_model.dart';
 
 class UserRepository {

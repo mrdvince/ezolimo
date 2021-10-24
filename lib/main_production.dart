@@ -1,9 +1,9 @@
-import 'logic/auth/auth_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'core/constants/strings.dart';
 import 'core/themes/app_theme.dart';
+import 'logic/auth/auth_cubit.dart';
 import 'presentation/router/app_router.dart';
 
 void main() {
