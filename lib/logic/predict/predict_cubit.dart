@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import '../../data/models/res_model.dart';
 import '../../data/repositories/obj_repository.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -28,7 +29,11 @@ class PredictCubit extends Cubit<PredictState> {
 
   void objDetectImage(Object? imageFile) async {
     var token = await _getToken();
-    objDetectRepository.getObjPred(token, imageFile.toString());
+    await objDetectRepository
+        .getObjPred(token, imageFile.toString())
+        .then((preds) {
+      emit(PredictDoneState(preds));
+    });
   }
 }
 

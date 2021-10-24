@@ -26,3 +26,11 @@ class NullIfyImage extends PredictState {
   @override
   Object? get imageFile => null;
 }
+
+class PredictDoneState extends PredictState {
+  final Predictions preds;
+  const PredictDoneState(this.preds);
+
+  @override
+  List<Object> get props => [preds];
+}
