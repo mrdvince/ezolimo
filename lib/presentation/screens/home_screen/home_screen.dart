@@ -57,6 +57,17 @@ class Camera extends StatefulWidget {
 }
 
 class _CameraState extends State<Camera> {
+  @override
+  Widget build(BuildContext context) {
+    final cubit = context.watch<PredictCubit>();
+    if (cubit.state is PredictLoadingState) {
+      return const Center(child: CircularProgressIndicator());
+    }
+    return cubit.state is PredictDoneState
+        ? predMethod(cubit, context)
+        : defaultMethod(cubit, context);
+  }
+
   void _openImagePicker(BuildContext context, PredictCubit cubit) {
     showModalBottomSheet(
         context: context,
@@ -86,17 +97,6 @@ class _CameraState extends State<Camera> {
             ),
           );
         });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final cubit = context.watch<PredictCubit>();
-    if (cubit.state is PredictLoadingState) {
-      return const Center(child: CircularProgressIndicator());
-    }
-    return cubit.state is PredictDoneState
-        ? predMethod(cubit)
-        : defaultMethod(cubit, context);
   }
 
   Column defaultMethod(PredictCubit cubit, BuildContext context) {
@@ -148,13 +148,32 @@ class _CameraState extends State<Camera> {
     );
   }
 
-  Image predMethod(PredictCubit cubit) {
+  Column predMethod(PredictCubit cubit, context) {
     var _predictions = cubit.state.preds;
-    return Image.network(
-      '${ServerUrls.baseUrl}/${_predictions!.path}/${_predictions.filename}',
-      fit: BoxFit.cover,
-      height: 300.0,
-      width: MediaQuery.of(context).size.width,
+
+    Expanded _buildImageCrops(int count, context) {
+      return Expanded(
+        child: ListView.builder(
+          padding: const EdgeInsets.only(top: 10, bottom: 15),
+          itemCount: count,
+          itemBuilder: (BuildContext contex, int index) {
+            var _url = _predictions!.imageCrops[index];
+            return Image.network('${ServerUrls.baseUrl}/$_url');
+          },
+        ),
+      );
+    }
+
+    return Column(
+      children: [
+        Image.network(
+          '${ServerUrls.baseUrl}/${_predictions!.path}/${_predictions.filename}',
+          fit: BoxFit.cover,
+          height: 300.0,
+          width: MediaQuery.of(context).size.width,
+        ),
+        _buildImageCrops(_predictions.imageCrops.length, context),
+      ],
     );
   }
 }
