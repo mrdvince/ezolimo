@@ -2,12 +2,13 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../../logic/storage.dart';
+import '../../data/repositories/user_repository.dart';
 
 part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
-  AuthCubit() : super(AuthInitial());
-
+  AuthCubit({required this.userRepository}) : super(AuthInitial());
+  final UserRepository userRepository;
   Future<void> isAuthenticated() async {
     final token = await _getToken();
     if (token != '') {
@@ -23,13 +24,15 @@ class AuthCubit extends Cubit<AuthState> {
     emit(Unauthenticated());
   }
 
-  void logIn({required String token}) {
-    if (token != '') {
-      _saveToken(token);
-      emit(Authenticated());
-    } else {
-      emit(Unauthenticated());
-    }
+  void authenticate(String email, String password) async {
+    await userRepository.signIn(email, password).then((token) {
+      if (token != '') {
+        _saveToken(token);
+        emit(Authenticated());
+      } else {
+        emit(AuthenticationError());
+      }
+    });
   }
 }
 
