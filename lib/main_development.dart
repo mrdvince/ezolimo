@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'core/constants/strings.dart';
 import 'core/themes/app_theme.dart';
+import 'data/repositories/user_repository.dart';
 import 'logic/debug/app_bloc_observer.dart';
 import 'presentation/router/app_router.dart';
 
@@ -21,7 +22,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AuthCubit(),
+      create: (context) => AuthCubit(userRepository: UserRepository()),
       child: MaterialApp(
         title: Strings.appTitle,
         theme: AppTheme.lightTheme,
