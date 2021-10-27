@@ -27,6 +27,7 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const SignInScreen(),
         );
+
       default:
         throw const RouteException('Route not found!');
     }

@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import '../../data/models/res_model.dart';
-import '../../data/repositories/obj_repository.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../data/models/res_model.dart';
+import '../../data/repositories/obj_repository.dart';
 import '../storage.dart';
 
 part 'predict_state.dart';

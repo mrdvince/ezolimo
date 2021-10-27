@@ -1,3 +1,9 @@
+import 'dart:convert';
+
+AuthToken authTokenFromJson(String str) => AuthToken.fromJson(json.decode(str));
+
+String authTokenToJson(AuthToken data) => json.encode(data.toJson());
+
 class AuthToken {
   AuthToken({
     required this.accessToken,
@@ -7,7 +13,13 @@ class AuthToken {
   String accessToken;
   String tokenType;
 
-  AuthToken.fromJson(Map json)
-      : accessToken = json["access_token"],
-        tokenType = json["token_type"];
+  factory AuthToken.fromJson(Map<String, dynamic> json) => AuthToken(
+        accessToken: json["access_token"],
+        tokenType: json["token_type"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "access_token": accessToken,
+        "token_type": tokenType,
+      };
 }

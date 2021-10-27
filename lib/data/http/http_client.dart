@@ -21,10 +21,9 @@ Future getAuthTokenReq(
       },
       body: map,
     );
-    var decodedJson = jsonDecode(response.body);
-    return decodedJson;
+    return response.body;
   } catch (e) {
-    return [];
+    return '';
   }
 }
 
