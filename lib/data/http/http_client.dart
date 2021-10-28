@@ -55,3 +55,37 @@ Future getObjDetPreds(token, String imageFilePath) async {
     throw 'something happened $e';
   }
 }
+
+getGptDetails(String token, question) async {
+  String url = ServerUrls.baseUrl + ServerUrls.gptUrl;
+  url = '$url/?question=$question';
+  try {
+    final response = await http.post(
+      Uri.parse(url),
+      headers: {
+        "Accept": "Application/json",
+        'Authorization': 'Bearer $token',
+      },
+    );
+    return response.body;
+  } catch (e) {
+    rethrow;
+  }
+}
+
+getGptDetailsWithLog(String token, String question, String chatLog) async {
+  String url = ServerUrls.baseUrl + ServerUrls.gptUrl;
+  url = '$url/?question=$question&chat_log=$chatLog';
+  try {
+    final response = await http.post(
+      Uri.parse(url),
+      headers: {
+        "Accept": "Application/json",
+        'Authorization': 'Bearer $token',
+      },
+    );
+    return response.body;
+  } catch (e) {
+    rethrow;
+  }
+}

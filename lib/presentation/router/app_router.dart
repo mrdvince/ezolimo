@@ -1,3 +1,5 @@
+import 'package:ezolimo/data/repositories/gpt_repository.dart';
+import 'package:ezolimo/logic/gpt/gpt_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -17,9 +19,15 @@ class AppRouter {
     switch (settings.name) {
       case home:
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) =>
-                PredictCubit(objDetectRepository: ObjDetectRepository()),
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                  create: (context) =>
+                      PredictCubit(objDetectRepository: ObjDetectRepository())),
+              BlocProvider(
+                  create: (context) =>
+                      GptCubit(gptRepository: GptRepository())),
+            ],
             child: const HomeScreen(),
           ),
         );
