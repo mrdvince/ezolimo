@@ -4,12 +4,13 @@ Taking food security, sustainable agriculture and "plant pathology" beyond the m
 
 ---
 
+Detailed guide in the main repo, https://github.com/mrdvince/box_of_crayons
+
 ## Getting Started 🚀
 
 This project contains 3 flavors:
 
 - development
-- staging
 - production
 
 To run the desired flavor either use the launch configuration in VSCode/Android Studio or use the following commands:
