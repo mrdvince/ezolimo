@@ -16,13 +16,10 @@ To run the desired flavor either use the launch configuration in VSCode/Android 
 
 ```sh
 # Development
-$ flutter run --flavor development --target lib/main_development.dart
-
-# Staging
-$ flutter run --flavor staging --target lib/main_staging.dart
+$ flutter run  --target lib/main_development.dart
 
 # Production
-$ flutter run --flavor production --target lib/main_production.dart
+$ flutter run --target lib/main_production.dart
 ```
 
 _\*Ezolimo works on iOS, Android._
