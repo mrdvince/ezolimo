@@ -59,7 +59,7 @@ fetchPredictions(PredictCubit cubit, context) {
           },
         ),
       ),
-      const GptDavinciEngine()
+      GptDavinciEngine(predictions: _predictions)
     ],
   );
 }
